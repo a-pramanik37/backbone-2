@@ -1,0 +1,21 @@
+.img-div {
+    width: 100%;
+    text-align: center;
+}
+
+.option-btn {
+    /* padding: 10px 20px; */
+    width: 200px;
+    height: 45px;
+    border: 0;
+    background-color: slategrey;
+    color: white;
+    font-weight: 500;
+}
+.option-btn:hover{
+    background-color: darkseagreen;
+}
+
+.hidden {
+    display: none !important;
+}
