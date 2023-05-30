@@ -19,3 +19,25 @@
 .hidden {
     display: none !important;
 }
+li{
+    list-style: none !important;
+}
+
+#employee-list li .edit {
+    display: none;
+}
+
+#employee-list li.editing .edit {
+	display: block;
+	width: 300px;
+	padding: 5px 15px;
+	margin: 0;
+}
+
+#employee-list .view {
+    background-color: steelblue;
+    width: 300px;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 3px;
+}

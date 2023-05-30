@@ -28,12 +28,10 @@
                 <div class="col-12 d-flex justify-content-center gap-2 py-4 flex-wrap " id="top-view">
                     <div><button class="btn option-btn" id="add-emp-btn">Add New Employee</button></div>
                     <div><button class="btn option-btn" id="show-emp-btn">Show All Employee</button></div>
-                    <div><button class="btn option-btn" id="edit-emp-btn">Edit/Delete Employee</button></div>
                 </div>
 
                 <div class="col-12 d-flex flex-column align-items-center gap-2" id="input-view">
                         <div><input type="text" id="input-name" placeholder="Enter employee name"></div>
-                        <div><input type="text" id="input-designation" placeholder="Enter designation"></div>
                         <div><button id="save-btn">Save Data</button></div>
                 </div>
 
@@ -44,7 +42,12 @@
                 <div class="col-12" id="output-view">
                     <!-- <h3>List of Employees</h3> -->
                     <!-- <div><ul id="employee-list"></ul></div> -->
-                    <div id="employee-list" class="d-flex flex-column align-items-center"></div>
+                    <div id="employee-list" class="d-flex flex-column align-items-center gap-2"></div>
+
+                    <div id="instructions" class="text-center mt-5">
+                        <p><strong>To Edit:</strong> Double click on name, update, then press ENTER to save</p>
+                        <p><strong>To Delete:</strong> Double click on name, clear the name, then press ENTER to save</p>
+                    </div>
                 </div>
 
             </div>
@@ -55,7 +58,13 @@
 
 
     <script type="text/template" id="employee-template">
-        <label><%= name %> - <%= designation %></label>
+
+        <div class="view text-center align-content-center">
+            <label><%= name %></label>
+            <a class="destroy"></a>
+        </div>
+        <input type="text" class="edit" value="<%- name %>">
+        
     </script>
     
 

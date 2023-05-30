@@ -5,7 +5,6 @@ let Person = Backbone.Model.extend({
     defaults : function(){
         return {
             name: "",
-            designation: "",
             order: personList.nextOrder()
         };
     },
@@ -35,13 +34,6 @@ let PersonCollection = Backbone.Collection.extend({
         return this.last().get("order")+1;
     },
 
-
-    // save: function(){
-    //     localStorage.setItem("personlist", JSON.stringify(this));
-    // },
-
-    // localStorage: new Backbone.localStorage("personlist"),
-
     comparator: 'order'
 
 });
@@ -49,15 +41,55 @@ let PersonCollection = Backbone.Collection.extend({
 // let personList = new PersonCollection;
 
 let EmpView = Backbone.View.extend({
-    tagName: "label",
+    tagName: "li",
 
     template: _.template($("#employee-template").html()),
+
+    events: {
+        "dblclick .view" : "edit",
+        "click a.destroy" : "clear",
+        "keypress .edit" : "updateOnEnter",
+        "blur .edit" : "close",
+    },
+
+    initialize: function(){
+        this.listenTo(this.model, 'change', this.render);
+        this.listenTo(this.model, 'destroy', this.remove);
+    },
+
 
     render: function(){
         let html = this.template(this.model.toJSON());
         this.$el.html(html);
+        this.input = this.$(".edit");
         return this;
-    }
+    },
+
+    edit: function(){
+        this.$el.addClass("editing");
+        this.input.focus();
+    },
+
+    close: function(){
+        let value = this.input.val();
+        if(!value){
+            this.clear();
+        }
+        else{
+            this.model.save({name:value});
+            this.$el.removeClass("editing");
+        }
+    },
+
+    updateOnEnter: function(e){
+        if(e.keyCode==13)this.close();
+    },
+    
+    clear: function(){
+        let name = this.model.get("name");
+        this.model.destroy();
+        alert(`Employee named ${name} has been removed!`);
+    },
 
 });
 
@@ -71,8 +103,7 @@ let InputView = Backbone.View.extend({
         "click #save-btn": "onclickSaveBtn",
         "click #add-emp-btn": "onclickAddNewEmployee",
         "click #show-emp-btn": "onclickShowAllEmployee",
-        "keypress #input-name": "goToDesignation",
-        "keypress #input-designation": "goToSaveBtn",
+        "keypress #input-name": "goToSaveBtn",
     },
 
     initialize: function(){
@@ -91,11 +122,6 @@ let InputView = Backbone.View.extend({
         this.hideElement("#output-view");
     },
     
-    goToDesignation: function(e){
-        if(e.keyCode==13){
-            this.$("#input-designation").focus();
-        }
-    },
 
     goToSaveBtn: function(e){
         if(e.keyCode==13){
@@ -115,28 +141,15 @@ let InputView = Backbone.View.extend({
     onclickSaveBtn: function(e){
         e.preventDefault();
         // e.stopPropagation();
-        let name = this.$("#input-name").val();
-        let designation = this.$("#input-designation").val();
-        
-        if(name && designation){
-            let txt = `Employee information saved!\nName: ${name} and Designation: ${designation}`;
-            let person = new Person({name: name, designation: designation});
-            // this.personList = JSON.parse(localStorage.getItem("personlist"));
+        let name = this.$("#input-name").val();        
+        if(name){
+            let txt = `Employee information saved!\nName: ${name}`;
+            let person = new Person({name: name});
 
-            // this.personList.add(person);
-            
-            // this.personList.fetch();
-            // personList.create({name: name, designation: designation});
             personList.create(person);
-            // this.personList.each(function(person){
-            //     person.save();
-                
-            // })
-
 
             this.showAlert(txt);
             this.clearInputBox("#input-name");
-            this.clearInputBox("#input-designation");
             this.$("#input-name").focus();
         }
         else{
