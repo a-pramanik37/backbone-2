@@ -29,15 +29,31 @@ li{
 
 #employee-list li.editing .edit {
 	display: block;
-	width: 300px;
+	width: 400px !important;
 	padding: 5px 15px;
 	margin: 0;
 }
 
 #employee-list .view {
     background-color: steelblue;
-    width: 300px;
+    width: 400px !important;
     padding: 5px 10px;
     color: white;
     border-radius: 3px;
+}
+
+#save-btn {
+    background-color: steelblue;
+    color: white;
+    border: 0;
+    width: 100px;
+    border-radius: 3px;
+    padding: 7px 10px;
+}
+#save-btn:hover {
+    background-color: #08375e;
+}
+#input-name {
+    width: 300px;
+    height: 40px;
 }
