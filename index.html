@@ -15,8 +15,8 @@
     <header>
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <div class="img-div"><img src="images/ems-logo-3.webp" alt=""></div>
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <div class="image-container"><img class="centered-image" src="images/ems-logo-3.webp" alt=""></div>
                 </div>
             </div>
         </div>
@@ -35,19 +35,22 @@
                             <div><button id="save-btn">Save Data</button></div>
                     </div>
     
-                    <div class="col-12 d-flex justify-content-center py-3" id="input-search-view">
-                        <div><input type="text" id="search-bar" placeholder="Search and employee"></div> 
-                    </div>
     
                     <div class="col-12" id="output-view">
                         <!-- <h3>List of Employees</h3> -->
                         <!-- <div><ul id="employee-list"></ul></div> -->
-                        <div id="employee-list" class="d-flex flex-column align-items-center gap-2"></div>
-    
-                        <div id="instructions" class="text-center mt-5">
-                            <p><strong>To Edit:</strong> Double click on name, update, then press ENTER to save</p>
-                            <p><strong>To Delete:</strong> Double click on name, clear the name, then press ENTER to save</p>
+                        <div id="total-employee" class="text-center mb-3"></div>
+                        <div id="instructions" class="text-center">
+                            <p><strong>To Edit:</strong> Double click on name, update, then press ENTER to save <br>
+                                <strong>To Delete:</strong> Double click on name, clear the name, then press ENTER to save
+                            </p>
                         </div>
+
+                        <div class="text-center mb-2"><input type="text" id="search-bar" placeholder="Search an employee"></div>
+
+                        <div id="employee-list" class="d-flex flex-column align-items-center gap-2 mb-5"></div>
+    
+
                     </div>
     
                 </div>

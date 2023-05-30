@@ -50,6 +50,7 @@ let EmpView = Backbone.View.extend({
         "click a.destroy" : "clear",
         "keypress .edit" : "updateOnEnter",
         "blur .edit" : "close",
+        
     },
 
     initialize: function(){
@@ -99,11 +100,14 @@ let personList = new PersonCollection;
 let InputView = Backbone.View.extend({
     el: $("#emp-view"),
 
+    template1: _.template("There are <%= noOfEmployees %> employees in this office"),
+
     events: {
         "click #save-btn": "onclickSaveBtn",
         "click #add-emp-btn": "onclickAddNewEmployee",
         "click #show-emp-btn": "onclickShowAllEmployee",
         "keypress #input-name": "goToSaveBtn",
+        "keyup #search-bar" : "performSearch"
     },
 
     initialize: function(){
@@ -160,6 +164,7 @@ let InputView = Backbone.View.extend({
     },
 
     onclickShowAllEmployee: function(){
+        this.$("#total-employee").html(this.template1({noOfEmployees: personList.length}))
         this.showElement("#output-view");
         this.hideInputArea();
         // personList.fetch();
@@ -185,8 +190,25 @@ let InputView = Backbone.View.extend({
     showElement: function(selector){
         // this.$(selector).show();
         this.$(selector).removeClass("hidden");
-    }
+    },
 
+    performSearch: function(){
+        let views = document.querySelectorAll(".view");
+        let searchQuery = this.$("#search-bar").val();
+
+        // console.log(searchQuery.toLowerCase());
+
+        for(let i=0; i<views.length; i++){
+            if($(views[i]).text().toLowerCase().
+            includes(searchQuery.toLowerCase())){
+                views[i].classList.remove("hidden");
+            }
+            else{
+                views[i].classList.add("hidden");
+            }
+        }
+
+    }
 
 
 

@@ -1,7 +1,20 @@
-.img-div {
+/* .img-div img{
     width: 100%;
+    object-fit: contain;
+    border: 1px solid red;
+} */
+
+.image-container {
+    max-width: 100%;
     text-align: center;
-}
+  }
+  
+  .centered-image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  
 
 .option-btn {
     /* padding: 10px 20px; */
@@ -29,17 +42,22 @@ li{
 
 #employee-list li.editing .edit {
 	display: block;
-	width: 400px !important;
+	width: 300px !important;
 	padding: 5px 15px;
 	margin: 0;
 }
 
 #employee-list .view {
     background-color: steelblue;
-    width: 400px !important;
+    width: 300px !important;
     padding: 5px 10px;
     color: white;
     border-radius: 3px;
+}
+
+#search-bar {
+    width: 300px;
+    text-align: center;
 }
 
 #save-btn {
@@ -55,5 +73,15 @@ li{
 }
 #input-name {
     width: 300px;
+    text-align: center;
     height: 40px;
+}
+
+#total-employee {
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+#employee-list .view:hover {
+    background-color: #08375e;
 }
