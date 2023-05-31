@@ -101,6 +101,8 @@ let InputView = Backbone.View.extend({
     el: $("#emp-view"),
 
     template1: _.template("There are <%= noOfEmployees %> employees in this office"),
+    template2: _.template("Welcome to Employee Management System"),
+
 
     events: {
         "click #save-btn": "onclickSaveBtn",
@@ -115,8 +117,18 @@ let InputView = Backbone.View.extend({
         this.hideElement("#input-view");
         this.hideElement("#input-search-view");
         this.hideElement("#output-view");
+        this.renderHome();
 
     },
+
+    renderHome: function(){
+        this.$("#welcome-msg").html(this.template2);
+    },
+
+    hideHomveView: function(){
+        this.hideElement("#home-view");
+    },
+
     hideInputArea: function(){
         this.hideElement("#input-view");
         this.hideElement("#input-search-view");
@@ -134,8 +146,9 @@ let InputView = Backbone.View.extend({
     },
 
     onclickAddNewEmployee: function (){
-        this.showElement("#input-view");
-        this.hideOutputArea();
+        this.showElement("#input-view"),
+        this.hideHomveView(),
+        this.hideOutputArea()
     },
 
     showAlert: function(txt){
@@ -166,6 +179,7 @@ let InputView = Backbone.View.extend({
     onclickShowAllEmployee: function(){
         this.$("#total-employee").html(this.template1({noOfEmployees: personList.length}))
         this.showElement("#output-view");
+        this.hideHomveView();
         this.hideInputArea();
         // personList.fetch();
         this.$("#employee-list").empty();
